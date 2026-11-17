@@ -35,3 +35,10 @@ $$\hat{y} = \beta_0 + \beta_1 x_1 + \dots + \beta_d x_d$$
 - **Cuándo no usarlo:**
   - Si existen dependencias altamente no lineales o complejas interacciones entre variables que no se hayan transformado manualmente.
   - Cuando la interpretabilidad no es prioridad y modelos de mayor capacidad superan holgadamente su desempeño.
+
+---
+
+## 5. Conclusiones de implementación
+- **NumPy vs. `scikit-learn` en Regresión Lineal:** Con los datos correctamente escalados (`StandardScaler` ajustado solo en `train`), el descenso de gradiente implementado con NumPy converge al mismo resultado que `LinearRegression` de `scikit-learn` (`R2: 0.9897` en el dataset de prueba de `main.py`).
+- **NumPy vs. `scikit-learn` en Regresión Logística:** `RegresionLogisticaNumPy` logra un desempeño muy cercano al de `LogisticRegression` (`Acc: 0.9737` vs. `0.9825` en `load_breast_cancer`). La ligera diferencia se debe a que `scikit-learn` usa regularización $L_2$ por defecto (`C=1.0`) y un optimizador cuasi-Newton (`lbfgs`).
+- **Importancia del preprocesamiento:** Escalar las variables antes de entrenar estabiliza el descenso de gradiente y evita que características con magnitudes grandes dominen las actualizaciones de los pesos.
